@@ -7,13 +7,17 @@ import Deck from './scripts/decks';
 // create a script that produces randomized decks for both players
 // eventListener/onClick function
 function App() {
-  const deck = new Deck();
-  deck.shuffle();
+  const deckOne = new Deck();
+  const deckTwo = new Deck()
+  deckOne.shuffle();
+  deckTwo.shuffle();
   
-  let initialCard = deck.cards[0];
+  let firstCard = deckOne.cards[0];
+  let startCard = deckTwo.cards[0];
   return (
     <div className="App">
-        <Card number={initialCard.number} suit={initialCard.suit} />
+        <Card number={firstCard.number} suit={firstCard.suit} />
+        <Card number={startCard.number} suit={startCard.suit} />
     </div>
   );
 }
