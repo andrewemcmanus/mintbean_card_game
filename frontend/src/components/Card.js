@@ -27,14 +27,13 @@ const CardStyle = styled.div`
     }
 `;
 
-export default function Card(props) {
-    // console.log(props);
+export default function Card({ number, suit }) {
     return (
         <div>
             <div>
                 <CardStyle>
-                    <span>{props.number}</span>
-                    <span>{props.suit}</span>
+                    <span>{number}</span>
+                    <span>{suit}</span>
                 </CardStyle>
             </div>
         </div>
