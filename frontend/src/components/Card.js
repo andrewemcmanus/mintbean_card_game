@@ -28,7 +28,7 @@ const CardStyle = styled.div`
 `;
 
 export default function Card(props) {
-    console.log(props);
+    // console.log(props);
     return (
         <div>
             <div>
