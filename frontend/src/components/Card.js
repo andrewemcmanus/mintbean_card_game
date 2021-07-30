@@ -21,7 +21,7 @@ const CardStyle = styled.div`
     -webkit-box-shadow: .2em .2em .5em #333;
     box-shadow: .2em .2em .5em #333;
     span {
-        font-size: 14px;
+        font-size: 28px;
         color: #7f8c9b;
         line-height: 150%;
     }

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Card from "./Card";
 import Deck from "../scripts/decks";
+import War from "../scripts/War";
+import toInt from "../scripts/toInt";
 
 export default function Cards() {
     const deck = new Deck();
@@ -20,27 +22,10 @@ export default function Cards() {
     const [ deckTwo, setDeckTwo ] = useState(initDeckTwo);
     const handleCount = () => {
         setCount(prevCount => prevCount + 1);
+        // setCount(0);
     }
-    function toInt(num) {
-        if (num === "J") {
-            let int = 11;
-            return int;
-        } else if (num === "Q") {
-            let int = 12;
-            return int;
-        } else if (num === "K") {
-            let int = 13;
-            return int;
-        } else if (num === "A" ) {
-            let int = 1;
-            return int;
-        } else {
-            let int = parseInt(num);
-            return int;
-        }
-
-    }
-    function returnWinner(input) {
+    
+    async function returnWinner(input) {
         let one = toInt(deckOne[input].number);
         let two = toInt(deckTwo[input].number);
         if (one > two) {
@@ -50,7 +35,6 @@ export default function Cards() {
             deckOne.push(lostCard);
             setDeckOne(deckOne);
             setDeckTwo(deckTwo);
-            setCount(0);
             if (deckOne.length > 51) {
                 alert("Player 1 wins!");
                 return deckOne;
@@ -65,7 +49,6 @@ export default function Cards() {
             deckTwo.push(lostCard);
             setDeckTwo(deckTwo);
             setDeckOne(deckOne);
-            // setCount(0);
             if (deckTwo.length > 51) {
                 alert("Player 2 wins!");
                 return deckTwo;
@@ -73,6 +56,9 @@ export default function Cards() {
             console.log(`Player 2 won: ${deckTwo.length} Player 1 lost: ${deckOne.length}`);
             return deckTwo;
         };
+        if (two === one) {
+            War(deckOne, deckTwo);
+        }
         
     }
     // For War: script or component?
@@ -82,6 +68,7 @@ export default function Cards() {
                 // e.preventDefault;
                 handleCount();
                 returnWinner(count);
+                // setCount(0);
             }}>next card</button>
             {/* issue with count and array length? */}
             <Card number={deckOne[0].number} suit={deckOne[0].suit}/>
