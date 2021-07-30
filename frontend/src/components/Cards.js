@@ -15,20 +15,42 @@ export default function Cards() {
         }
     });
     
-    // const [ count, setCount ] = useState(0);
+    const [ count, setCount ] = useState(0);
     const [ deckOne, setDeckOne ] = useState(initDeckOne);
     const [ deckTwo, setDeckTwo ] = useState(initDeckTwo);
-    // const handleCount = () => {
-    //     setCount(prevCount => prevCount + 1);
-    // }
+    const handleCount = () => {
+        setCount(prevCount => prevCount + 1);
+    }
+    function toInt(num) {
+        if (num === "J") {
+            let int = 11;
+            return int;
+        } else if (num === "Q") {
+            let int = 12;
+            return int;
+        } else if (num === "K") {
+            let int = 13;
+            return int;
+        } else if (num === "A" ) {
+            let int = 1;
+            return int;
+        } else {
+            let int = parseInt(num);
+            return int;
+        }
+
+    }
     function returnWinner(input) {
-        if (deckOne[input].number > deckTwo[input].number) {
+        let one = toInt(deckOne[input].number);
+        let two = toInt(deckTwo[input].number);
+        if (one > two) {
             let lostCard = deckTwo.shift();
+            // deckTwo.shift();
             deckOne.push(deckOne.shift());
             deckOne.push(lostCard);
             setDeckOne(deckOne);
             setDeckTwo(deckTwo);
-            // setCount(0);
+            setCount(0);
             if (deckOne.length > 51) {
                 alert("Player 1 wins!");
                 return deckOne;
@@ -36,8 +58,9 @@ export default function Cards() {
             console.log(`Player 1 won: ${deckOne.length} Player 2 lost: ${deckTwo.length}`);
             return deckOne;
         };
-        if (deckTwo[input].number > deckOne[input].number) {
+        if (two > one) {
             let lostCard = deckOne.shift();
+            // deckOne.shift();
             deckTwo.push(deckTwo.shift());
             deckTwo.push(lostCard);
             setDeckTwo(deckTwo);
@@ -57,8 +80,8 @@ export default function Cards() {
         <div>
             <button onClick={() => {
                 // e.preventDefault;
-                // handleCount();
-                returnWinner(0);
+                handleCount();
+                returnWinner(count);
             }}>next card</button>
             {/* issue with count and array length? */}
             <Card number={deckOne[0].number} suit={deckOne[0].suit}/>
