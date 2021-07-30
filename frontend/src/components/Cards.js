@@ -70,7 +70,7 @@ export default function Cards() {
                 returnWinner(count);
                 // setCount(0);
             }}>next card</button>
-            {/* issue with count and array length? */}
+            {/* return these things farther up? */}
             <Card number={deckOne[0].number} suit={deckOne[0].suit}/>
             <Card number={deckTwo[0].number} suit={deckTwo[0].suit} />
         </div>
