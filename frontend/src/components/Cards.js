@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "./Card";
 import Deck from "../scripts/decks";
-import War from "../scripts/War";
+// import War from "../scripts/War";
 import toInt from "../scripts/toInt";
 
 export default function Cards() {
@@ -63,20 +63,67 @@ export default function Cards() {
             return deckTwo;
         };
         if (two === one) {
-            War(deckOne, deckTwo);
+            let warCardsA = [deckA[0], deckA[1], deckA[2]];
+            let warCardsB = [deckB[0], deckB[1], deckB[2]];
+            // firstDeck[0] == secondDeck[0]
+            // need next two cards from each player
+            function firstNumberToPlay(num1, num2) {
+                if (num1 > num2) {
+                    let firstNumberToPlay = num1;
+                    return firstNumberToPlay;
+                } else {
+                    let firstNumberToPlay = num2;
+                    return firstNumberToPlay;
+                }
+            }
+            function secondNumberToPlay(num1, num2) {
+                if (num1 > num2) {
+                    let secondNumberToPlay = num1;
+                    return secondNumberToPlay;
+                } else {
+                    let secondNumberToPlay = num2;
+                    return secondNumberToPlay;
+                }
+            }
+            firstNumberToPlay(deckA[1].number, deckA[2].number);
+            secondNumberToPlay(deckB[1].number, deckB[2].number);
+            
+            if (firstNumberToPlay > secondNumberToPlay) {
+                warCardsB.forEach((element) => (deckA.push(element)))
+                deckB.splice(0, 3);
+                setDeckOne(deckA);
+                setDeckOneTopCard(deckA[0]);
+                setDeckTwo(deckB);
+                setDeckTwoTopCard(deckB[0]);
+                if (deckA.length > 51) {
+                    alert("Player 1 wins!");
+                    return deckA;
+                }
+                console.log(`Player 1 won: ${deckA.length} Player 2 lost: ${deckB.length}`);
+                return deckA;
+            };
+            if (secondNumberToPlay > firstNumberToPlay) {
+                warCardsA.forEach((element) => (deckB.push(element)))
+                deckA.splice(0,3);
+                setDeckOne(deckA);
+                setDeckOneTopCard(deckA[0]);
+                setDeckTwo(deckB);
+                setDeckTwoTopCard(deckB[0]);
+                if (deckA.length > 51) {
+                    alert("Player 2 wins!");
+                    return deckB;
+                }
+                console.log(`Player 2 won: ${deckB.length} Player 1 lost: ${deckA.length}`);
+                return deckB;
+            }
         }
         
     }
-    // For War: script or component?
     return (
         <div>
             <button onClick={() => {
-                // e.preventDefault;
-                // handleCount();
                 returnWinner(deckOne, deckTwo);
-                // setCount(0);
             }}>next card</button>
-            {/* return these things farther up? */}
             <Card number={deckOneTopCard.number} suit={deckOneTopCard.suit}/>
             <Card number={deckTwoTopCard.number} suit={deckTwoTopCard.suit} />
         </div>
