@@ -17,25 +17,29 @@ export default function Cards() {
         }
     });
     
-    const [ count, setCount ] = useState(0);
+    // const [ count, setCount ] = useState(0);
     const [ deckOne, setDeckOne ] = useState(initDeckOne);
+    const [ deckOneTopCard, setDeckOneTopCard ] = useState(deckOne[0]);
     const [ deckTwo, setDeckTwo ] = useState(initDeckTwo);
-    const handleCount = () => {
-        setCount(prevCount => prevCount + 1);
-        // setCount(0);
-    }
+    const [ deckTwoTopCard, setDeckTwoTopCard ] = useState(deckTwo[0]);
+    // const handleCount = () => {
+    //     setCount(prevCount => prevCount + 1);
+    //     // setCount(0);
+    // }
     
-    async function returnWinner(input) {
-        let one = toInt(deckOne[input].number);
-        let two = toInt(deckTwo[input].number);
+    async function returnWinner(deckA, deckB) {
+        let one = toInt(deckA[0].number);
+        let two = toInt(deckB[0].number);
         if (one > two) {
-            let lostCard = deckTwo.shift();
+            let lostCard = deckB.shift();
             // deckTwo.shift();
-            deckOne.push(deckOne.shift());
-            deckOne.push(lostCard);
-            setDeckOne(deckOne);
-            setDeckTwo(deckTwo);
-            if (deckOne.length > 51) {
+            deckA.push(deckA.shift());
+            deckA.push(lostCard);
+            setDeckOne(deckA);
+            setDeckOneTopCard(deckA[0]);
+            setDeckTwo(deckB);
+            setDeckTwoTopCard(deckB[0]);
+            if (deckA.length > 51) {
                 alert("Player 1 wins!");
                 return deckOne;
             }
@@ -43,13 +47,15 @@ export default function Cards() {
             return deckOne;
         };
         if (two > one) {
-            let lostCard = deckOne.shift();
+            let lostCard = deckA.shift();
             // deckOne.shift();
-            deckTwo.push(deckTwo.shift());
-            deckTwo.push(lostCard);
-            setDeckTwo(deckTwo);
-            setDeckOne(deckOne);
-            if (deckTwo.length > 51) {
+            deckB.push(deckB.shift());
+            deckB.push(lostCard);
+            setDeckTwo(deckB);
+            setDeckTwoTopCard(deckB[0]);
+            setDeckOne(deckA);
+            setDeckOneTopCard(deckA[0]);
+            if (deckB.length > 51) {
                 alert("Player 2 wins!");
                 return deckTwo;
             };
@@ -66,13 +72,13 @@ export default function Cards() {
         <div>
             <button onClick={() => {
                 // e.preventDefault;
-                handleCount();
-                returnWinner(count);
+                // handleCount();
+                returnWinner(deckOne, deckTwo);
                 // setCount(0);
             }}>next card</button>
             {/* return these things farther up? */}
-            <Card number={deckOne[0].number} suit={deckOne[0].suit}/>
-            <Card number={deckTwo[0].number} suit={deckTwo[0].suit} />
+            <Card number={deckOneTopCard.number} suit={deckOneTopCard.suit}/>
+            <Card number={deckTwoTopCard.number} suit={deckTwoTopCard.suit} />
         </div>
     )
 }
