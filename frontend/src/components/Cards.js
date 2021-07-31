@@ -17,17 +17,12 @@ export default function Cards() {
         }
     });
     
-    // const [ count, setCount ] = useState(0);
     const [ deckOne, setDeckOne ] = useState(initDeckOne);
     const [ deckOneTopCard, setDeckOneTopCard ] = useState(deckOne[0]);
     const [ deckTwo, setDeckTwo ] = useState(initDeckTwo);
     const [ deckTwoTopCard, setDeckTwoTopCard ] = useState(deckTwo[0]);
-    // const handleCount = () => {
-    //     setCount(prevCount => prevCount + 1);
-    //     // setCount(0);
-    // }
     
-    async function returnWinner(deckA, deckB) {
+    function returnWinner(deckA, deckB) {
         let one = toInt(deckA[0].number);
         let two = toInt(deckB[0].number);
         if (one > two) {
@@ -43,7 +38,7 @@ export default function Cards() {
                 alert("Player 1 wins!");
                 return deckOne;
             }
-            console.log(`Player 1 won: ${deckOne.length} Player 2 lost: ${deckTwo.length}`);
+            // console.log(`Player 1 won: ${deckOne.length} Player 2 lost: ${deckTwo.length}`);
             return deckOne;
         };
         if (two > one) {
@@ -59,7 +54,7 @@ export default function Cards() {
                 alert("Player 2 wins!");
                 return deckTwo;
             };
-            console.log(`Player 2 won: ${deckTwo.length} Player 1 lost: ${deckOne.length}`);
+            // console.log(`Player 2 won: ${deckTwo.length} Player 1 lost: ${deckOne.length}`);
             return deckTwo;
         };
         if (two === one) {
@@ -78,11 +73,6 @@ export default function Cards() {
                 setDeckOneTopCard(deckA[0]);
                 setDeckTwo(deckB);
                 setDeckTwoTopCard(deckB[0]);
-                if (deckA.length > 51) {
-                    alert("Player 1 wins!");
-                    return deckA;
-                }
-                console.log(`Player 1 won: ${deckA.length} Player 2 lost: ${deckB.length}`);
                 return deckA;
             };
             if (secondPlayerChoice > firstPlayerChoice) {
@@ -92,29 +82,31 @@ export default function Cards() {
                 setDeckOneTopCard(deckA[0]);
                 setDeckTwo(deckB);
                 setDeckTwoTopCard(deckB[0]);
-                if (deckA.length > 51) {
-                    alert("Player 2 wins!");
-                    return deckB;
-                }
-                console.log(`Player 2 won: ${deckB.length} Player 1 lost: ${deckA.length}`);
                 return deckB;
             };
             if (firstPlayerChoice === secondPlayerChoice) {
                 // simpler for now: no one changes any cards
+                deckA.push(deckA.shift());
+                deckB.push(deckB.shift());
                 setDeckOne(deckA);
                 setDeckOneTopCard(deckA[0]);
                 setDeckTwo(deckB);
                 setDeckTwoTopCard(deckB[0]);
+                return deckA;
             }
         }
-    }
-    return (
-        <div>
-            <button onClick={() => {
-                returnWinner(deckOne, deckTwo);
-            }}>next card</button>
-            <Card number={deckOneTopCard.number} suit={deckOneTopCard.suit} score={deckOne.length}/>
-            <Card number={deckTwoTopCard.number} suit={deckTwoTopCard.suit} score={deckTwo.length}/>
-        </div>
-    )
+    };
+    if (deckOne.length && deckTwo.length) {
+        return (
+            <div>
+                <button onClick={() => {
+                    returnWinner(deckOne, deckTwo);
+                }}>next card</button>
+                <Card number={deckOneTopCard.number} suit={deckOneTopCard.suit} score={deckOne.length}/>
+                <Card number={deckTwoTopCard.number} suit={deckTwoTopCard.suit} score={deckTwo.length}/>
+            </div>
+        )
+    };
+    // renders nothing unless both decks exist
+    
 }
