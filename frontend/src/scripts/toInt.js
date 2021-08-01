@@ -9,7 +9,7 @@ export default function toInt(num) {
         let int = 13;
         return int;
     } else if (num === "A" ) {
-        let int = 1;
+        let int = 14;
         return int;
     } else {
         let int = parseInt(num);

@@ -96,7 +96,6 @@ export default function Cards() {
             }
         }
     };
-    // add War cards?
     if (deckOne.length && deckTwo.length) {
         if (deckOneTopCard.number === deckTwoTopCard.number) {
             return (
