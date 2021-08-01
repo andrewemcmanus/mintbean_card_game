@@ -27,11 +27,10 @@ export const CardStyle = styled.div`
     }
 `;
 
-export default function Card({ number, suit, score }) {
+export default function Card({ number, suit }) {
     return (
         <div>
             <div>
-                <h3>Score: {score}</h3>
                 <CardStyle>
                     <span>{number}</span>
                     <span>{suit}</span>

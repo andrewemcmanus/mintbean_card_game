@@ -104,8 +104,9 @@ export default function Cards() {
                     <button onClick={() => {
                         returnWinner(deckOne, deckTwo);
                     }}>next card</button>
-                    {/* add War Cards */}
+                    <h3>Player 1: {deckOne.length}</h3>
                     <WarCards deck={deckOne} topCard={deckOneTopCard} />
+                    <h3>Player 2: {deckTwo.length}</h3>
                     <WarCards deck={deckTwo} topCard={deckTwoTopCard} />
                 </div>
             )
@@ -114,8 +115,10 @@ export default function Cards() {
                 <button onClick={() => {
                     returnWinner(deckOne, deckTwo);
                 }}>next card</button>
-                <Card number={deckOneTopCard.number} suit={deckOneTopCard.suit} score={deckOne.length}/>
-                <Card number={deckTwoTopCard.number} suit={deckTwoTopCard.suit} score={deckTwo.length}/>
+                <h3>Player 1: {deckOne.length}</h3>
+                <Card number={deckOneTopCard.number} suit={deckOneTopCard.suit} />
+                <h3>Player 2: {deckTwo.length}</h3>
+                <Card number={deckTwoTopCard.number} suit={deckTwoTopCard.suit} />
             </div>
         )
     };
