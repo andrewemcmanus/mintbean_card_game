@@ -50,10 +50,10 @@ export default function Cards() {
             setDeckTwoTopCard(deckB[0]);
             setDeckOne(deckA);
             setDeckOneTopCard(deckA[0]);
-            if (deckB.length > 51) {
-                alert("Player 2 wins!");
-                return deckTwo;
-            };
+            // if (deckB.length > 51) {
+            //     alert("Player 2 wins!");
+            //     return deckTwo;
+            // };
             // console.log(`Player 2 won: ${deckTwo.length} Player 1 lost: ${deckOne.length}`);
             return deckTwo;
         };
@@ -107,6 +107,25 @@ export default function Cards() {
             </div>
         )
     };
-    // renders nothing unless both decks exist
-    
+    if ( !deckOne.length || !deckTwo.length ) {
+        if (deckOne.length) {
+            return (
+                <div>
+                    <h2>Player 1 wins!</h2>
+                    <h2>play again</h2>
+                </div>
+            )
+        }
+        if (deckTwo.length) {
+            return (
+                // Make winner page to render
+                <div>
+                    <h2>Player 2 wins!</h2>
+                    <h2>play again</h2>
+                </div>
+            )
+
+        }
+        
+    }
 }
