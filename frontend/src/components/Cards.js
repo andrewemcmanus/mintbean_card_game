@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "./Card";
+import WarCards from "./WarCards";
 import Deck from "../scripts/decks";
-// import War from "../scripts/War";
 import toInt from "../scripts/toInt";
 
 export default function Cards() {
@@ -96,8 +96,20 @@ export default function Cards() {
             }
         }
     };
+    // add War cards?
     if (deckOne.length && deckTwo.length) {
-        return (
+        if (deckOneTopCard.number === deckTwoTopCard.number) {
+            return (
+                <div>
+                    <button onClick={() => {
+                        returnWinner(deckOne, deckTwo);
+                    }}>next card</button>
+                    {/* add War Cards */}
+                    <WarCards deck={deckOne} topCard={deckOneTopCard} />
+                    <WarCards deck={deckTwo} topCard={deckTwoTopCard} />
+                </div>
+            )
+        } else return (
             <div>
                 <button onClick={() => {
                     returnWinner(deckOne, deckTwo);

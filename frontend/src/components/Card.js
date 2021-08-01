@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CardStyle = styled.div`
+export const CardStyle = styled.div`
     display: inline-block;
     width: 3.3em;
     height: 4.6em;
