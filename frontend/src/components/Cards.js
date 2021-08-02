@@ -96,6 +96,7 @@ export default function Cards() {
             }
         }
     };
+    // does WarCards need the top card? Or is it retained from previous renders?
     if (deckOne.length && deckTwo.length) {
         if (deckOneTopCard.number === deckTwoTopCard.number) {
             return (
@@ -108,12 +109,12 @@ export default function Cards() {
                     <h3>Player 2: {deckTwo.length}</h3>
                     <WarCards deck={deckTwo} topCard={deckTwoTopCard} />
                 </div>
-            )
+            );
         } else return (
             <div>
                 <button onClick={() => {
                     returnWinner(deckOne, deckTwo);
-                }}>next card</button>
+                }}>Play</button>
                 <h3>Player 1: {deckOne.length}</h3>
                 <Card number={deckOneTopCard.number} suit={deckOneTopCard.suit} />
                 <h3>Player 2: {deckTwo.length}</h3>
@@ -132,7 +133,7 @@ export default function Cards() {
         }
         if (deckTwo.length) {
             return (
-                // Make winner page to render
+                // Make winner page to render?
                 <div>
                     <h2>Player 2 wins!</h2>
                     <h2>play again</h2>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CardStyle = styled.div`
-    display: inline-block;
+    display: grid;
     width: 3.3em;
     height: 4.6em;
     border: 1px solid #666;
@@ -30,12 +30,10 @@ export const CardStyle = styled.div`
 export default function Card({ number, suit }) {
     return (
         <div>
-            <div>
-                <CardStyle>
-                    <span>{number}</span>
-                    <span>{suit}</span>
-                </CardStyle>
-            </div>
+            <CardStyle>
+                <span>{number}</span>
+                <span>{suit}</span>
+            </CardStyle>
         </div>
     )
 }
