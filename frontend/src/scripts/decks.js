@@ -16,7 +16,6 @@ export default class Deck {
             const oldValue = this.cards[newIndex];
             this.cards[newIndex] = this.cards[i];
             this.cards[i] = oldValue;
-            // console.log(newIndex);
         }
     }
 }

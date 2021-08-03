@@ -5,7 +5,9 @@ import styled from "styled-components";
 
 export const WarCardStyle = styled.div`
     .card {
-        display: flex-grow;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
         width: 3.3em;
         height: 4.6em;
         border: 1px solid #666;
@@ -29,7 +31,7 @@ export const WarCardStyle = styled.div`
 
 export default function WarCards({ deck, topCard }) {
     return (
-        <div class="card">
+        <div className="card">
             <WarCardStyle>
                 <Card number={deck[1].number} suit={deck[1].suit} />
                 <Card number={topCard.number} suit={topCard.suit} />

@@ -88,10 +88,10 @@ export default function Cards() {
     if (deckOne.length && deckTwo.length) {
         if (deckOneTopCard.number === deckTwoTopCard.number) {
             return (
-                <div class="card">
+                <div>
                     <button onClick={() => {
                         returnWinner(deckOne, deckTwo);
-                    }}>next card</button>
+                    }}>Draw</button>
                     <h2>WAR</h2>
                     <h3>Player 1: {deckOne.length}</h3>
                     <WarCards deck={deckOne} topCard={deckOneTopCard} />
@@ -105,11 +105,11 @@ export default function Cards() {
                 <div>
                     <button onClick={() => {
                         returnWinner(deckOne, deckTwo);
-                    }}>Play</button>
+                    }}>Draw</button>
                     <h3>Player 1: {deckOne.length}</h3>
-                    <Card number={deckOneTopCard.number} suit={deckOneTopCard.suit} className="card" />
+                    <Card number={deckOneTopCard.number} suit={deckOneTopCard.suit} />
                     <h3>Player 2: {deckTwo.length}</h3>
-                    <Card number={deckTwoTopCard.number} suit={deckTwoTopCard.suit} className="card" />
+                    <Card number={deckTwoTopCard.number} suit={deckTwoTopCard.suit} />
                 </div>
             )
         } 

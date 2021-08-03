@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CardStyle = styled.div`
-    display: flex-grow;
+    display: flex;
     width: 3.3em;
     height: 4.6em;
     border: 1px solid #666;
