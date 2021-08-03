@@ -27,34 +27,22 @@ export default function Cards() {
         let two = toInt(deckB[0].number);
         if (one > two) {
             let lostCard = deckB.shift();
-            // deckTwo.shift();
             deckA.push(deckA.shift());
             deckA.push(lostCard);
             setDeckOne(deckA);
             setDeckOneTopCard(deckA[0]);
             setDeckTwo(deckB);
             setDeckTwoTopCard(deckB[0]);
-            if (deckA.length > 51) {
-                alert("Player 1 wins!");
-                return deckOne;
-            }
-            // console.log(`Player 1 won: ${deckOne.length} Player 2 lost: ${deckTwo.length}`);
             return deckOne;
         };
         if (two > one) {
             let lostCard = deckA.shift();
-            // deckOne.shift();
             deckB.push(deckB.shift());
             deckB.push(lostCard);
             setDeckTwo(deckB);
             setDeckTwoTopCard(deckB[0]);
             setDeckOne(deckA);
             setDeckOneTopCard(deckA[0]);
-            // if (deckB.length > 51) {
-            //     alert("Player 2 wins!");
-            //     return deckTwo;
-            // };
-            // console.log(`Player 2 won: ${deckTwo.length} Player 1 lost: ${deckOne.length}`);
             return deckTwo;
         };
         if (two === one) {
@@ -64,7 +52,6 @@ export default function Cards() {
             let playerAHand = [toInt(deckA[1].number), toInt(deckA[2].number)];
             let playerBHand = [toInt(deckB[1].number), toInt(deckB[2].number)];
             let firstPlayerChoice = Math.max(...playerAHand);
-            // console.log(firstPlayerChoice)
             let secondPlayerChoice = Math.max(...playerBHand)
             if (firstPlayerChoice > secondPlayerChoice) {
                 warCardsB.forEach((element) => (deckA.push(element)))
@@ -86,6 +73,7 @@ export default function Cards() {
             };
             if (firstPlayerChoice === secondPlayerChoice) {
                 // simpler for now: no one changes any cards
+                // (rather than run War again)
                 deckA.push(deckA.shift());
                 deckB.push(deckB.shift());
                 setDeckOne(deckA);
@@ -96,38 +84,42 @@ export default function Cards() {
             }
         }
     };
-    // does WarCards need the top card? Or is it retained from previous renders?
+
     if (deckOne.length && deckTwo.length) {
         if (deckOneTopCard.number === deckTwoTopCard.number) {
             return (
-                <div>
+                <div class="card">
                     <button onClick={() => {
                         returnWinner(deckOne, deckTwo);
                     }}>next card</button>
+                    <h2>WAR</h2>
                     <h3>Player 1: {deckOne.length}</h3>
                     <WarCards deck={deckOne} topCard={deckOneTopCard} />
                     <h3>Player 2: {deckTwo.length}</h3>
                     <WarCards deck={deckTwo} topCard={deckTwoTopCard} />
                 </div>
             );
-        } else return (
-            <div>
-                <button onClick={() => {
-                    returnWinner(deckOne, deckTwo);
-                }}>Play</button>
-                <h3>Player 1: {deckOne.length}</h3>
-                <Card number={deckOneTopCard.number} suit={deckOneTopCard.suit} />
-                <h3>Player 2: {deckTwo.length}</h3>
-                <Card number={deckTwoTopCard.number} suit={deckTwoTopCard.suit} />
-            </div>
-        )
+        };
+        if (deckOneTopCard.number !== deckTwoTopCard.number) {
+            return (
+                <div>
+                    <button onClick={() => {
+                        returnWinner(deckOne, deckTwo);
+                    }}>Play</button>
+                    <h3>Player 1: {deckOne.length}</h3>
+                    <Card number={deckOneTopCard.number} suit={deckOneTopCard.suit} className="card" />
+                    <h3>Player 2: {deckTwo.length}</h3>
+                    <Card number={deckTwoTopCard.number} suit={deckTwoTopCard.suit} className="card" />
+                </div>
+            )
+        } 
     };
     if ( !deckOne.length || !deckTwo.length ) {
         if (deckOne.length) {
             return (
                 <div>
                     <h2>Player 1 wins!</h2>
-                    <h2>play again</h2>
+                    <a href="#" onclick="window.location.reload(true);">play again</a>
                 </div>
             )
         }
@@ -136,7 +128,7 @@ export default function Cards() {
                 // Make winner page to render?
                 <div>
                     <h2>Player 2 wins!</h2>
-                    <h2>play again</h2>
+                    <a href="#" onClick="window.location.reload(true);">play again</a>
                 </div>
             )
 
